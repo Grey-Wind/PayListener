@@ -20,8 +20,8 @@ namespace PayListener
 
         public class List
         {
-            public string from { get; set; }
-            public string content { get; set; }
+            public string? from { get; set; }
+            public string? content { get; set; }
         }
 
         public static void WechatCallback(string msg)
@@ -49,6 +49,7 @@ namespace PayListener
                         if (node?["key"]?["word"]?.InnerText == "付款方备注")
                         {
                             note = node?["value"]?["word"]?.InnerText ?? "";
+                            // Shell.WriteLine(note);
                             break;
                         }
                     }
@@ -66,6 +67,10 @@ namespace PayListener
                         Program.wechat_DataTable.Rows.Add(dr);
                     }));
                     Shell.WriteLine("{0}|微信：{1}", "信息", "信息有效, 已处理");
+
+                    Console.WriteLine("微信支付收款" + amount + "元");
+                    Console.WriteLine("付款方备注：" + note);
+                    Console.WriteLine("汇总今日第" + pub_time + "笔收款");
                 }  catch { }
                 /*
                 Regex regex = new Regex(@"<!\[CDATA\[微信支付收款(?<amount>[\s\S]*?)元\(朋友到店\)]]>[\s\S]*?付款方备注(?<note>[\s\S]*?)汇总今日第[\s\S]*?<pub_time>(?<time>[\s\S]*?)<\/pub_time>", RegexOptions.IgnoreCase);
@@ -80,12 +85,12 @@ namespace PayListener
                     if (state != "上报成功") state = "失败: " + state;
                     System.DateTime startTime = TimeZoneInfo.ConvertTimeFromUtc(new System.DateTime(1970, 1, 1), TimeZoneInfo.Local);
                     var timedate = startTime.AddSeconds(int.Parse(time));
-                    DataRow dr = Program.dataTable.NewRow();
+                    DataRow dr = Program.wechat_DataTable.NewRow();
                     dr[0] = timedate.ToString("yyyy-MM-dd hh:mm:ss");
                     dr[1] = amount;
                     dr[2] = note;
                     dr[3] = state;
-                    Program.dataTable.Rows.Add(dr);
+                    Program.wechat_DataTable.Rows.Add(dr);
                 }
                 */
             }

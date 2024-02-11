@@ -2,16 +2,15 @@
 
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
-    <TargetFramework>net6.0-windows</TargetFramework>
+    <TargetFramework>net6.0-windows7.0</TargetFramework>
     <Nullable>enable</Nullable>
     <UseWindowsForms>true</UseWindowsForms>
     <ImplicitUsings>enable</ImplicitUsings>
     <Platforms>AnyCPU;x86</Platforms>
     <UseWPF>False</UseWPF>
     <ApplicationIcon>icon.ico</ApplicationIcon>
-    <SignAssembly>True</SignAssembly>
-    <AssemblyOriginatorKeyFile>D:\source\repos\MODcraft.snk</AssemblyOriginatorKeyFile>
-    <DelaySign>True</DelaySign>
+    <SignAssembly>False</SignAssembly>
+    <DelaySign>False</DelaySign>
     <AssemblyVersion>1.0.2.1</AssemblyVersion>
     <FileVersion>1.0.2.1</FileVersion>
   </PropertyGroup>
